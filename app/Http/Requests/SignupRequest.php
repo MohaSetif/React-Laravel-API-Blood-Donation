@@ -33,6 +33,7 @@ class SignupRequest extends FormRequest
             'adr' => 'required|string',
             'hospital' => 'required',
             'tel' => 'required',
+            'image' => 'required',
             'email' => 'required|email|string|unique:users,email',
             'password' => [
                 'required',

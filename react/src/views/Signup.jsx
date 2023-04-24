@@ -16,42 +16,48 @@ export default function Signup() {
   const [hospital, setHospital] = useState("");
   const [tel, setTel] = useState("");
   const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [error, setError] = useState({ __html: "" });
 
-  const onSubmit = (ev) => {
-    ev.preventDefault();
-    setError({ __html: "" });
+const onSubmit = (ev) => {
+  ev.preventDefault();
+  setError({ __html: "" });
 
+  const formData = new FormData();
+  formData.append("name", fullName);
+  formData.append("id", id);
+  formData.append("surname", surname);
+  formData.append("gender", gender);
+  formData.append("birth_date", birth_date);
+  formData.append("adr", adr);
+  formData.append("tel", tel);
+  formData.append("hospital", hospital);
+  formData.append("email", email);
+  formData.append("password", password);
+  formData.append("password_confirmation", passwordConfirmation);
+  formData.append("image", image);
 
-    axiosClient
-      .post("/signup", {
-        name: fullName,
-        id,
-        surname,
-        gender,
-        birth_date,
-        adr, 
-        tel,
-        hospital,
-        email,
-        password,
-        password_confirmation: passwordConfirmation,
-      })
-      .then(({ data }) => {
-        setCurrentUser(data.user)
-        setUserToken(data.token)
-      })
-      .catch((error) => {
-        if (error.response) {
-          const finalErrors = Object.values(error.response.data.errors).reduce((accum, next) => [...accum, ...next], [])
-          console.log(finalErrors)
-          setError({__html: finalErrors.join('<br>')})
-        }
-        console.error(error)
-      });
-  };
+  axiosClient
+    .post("/signup", formData)
+    .then(({ data }) => {
+      setCurrentUser(data.user);
+      setUserToken(data.token);
+    })
+    .catch((error) => {
+      if (error.response) {
+        const finalErrors = Object.values(error.response.data.errors).reduce(
+          (accum, next) => [...accum, ...next],
+          []
+        );
+        console.log(finalErrors);
+        setError({ __html: finalErrors.join("<br>") });
+      }
+      console.error(error);
+    });
+};
+
 
   return (
     <>
@@ -268,6 +274,21 @@ export default function Signup() {
               className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="Password Confirmation"
             />
+          </div>
+
+          <div>
+            <label htmlFor="password-confirmation" className="sr-only">
+              Upload Image
+            </label>
+            <input
+  id="image"
+  name="image"
+  type="file"
+  required
+  onChange={(e) => setImage(e.target.files[0])}
+  className="relative block w-full ..."
+/>
+
           </div>
         </div>
 

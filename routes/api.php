@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
+    Route::get('/myImage', [AuthController::class, 'getUserImage']);
     Route::apiResource('survey', SurveyController::class);
     Route::resource('/blood_bank', BloodBankCtrl::class);
     Route::resource('/blood_groups', BloodCtrl::class);
@@ -48,6 +49,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
+    Route::get('/myImage', [AuthController::class, 'getUserImage']);
     Route::resource('/doc_blood_bank', BloodBankCtrl::class);
     Route::resource('/doc_blood_groups', BloodCtrl::class);
     Route::get('/dashboard', [DashboardController::class, 'index']);

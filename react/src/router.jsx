@@ -22,7 +22,7 @@ import Doc_Blood_Bank from './views/doctors/Blood_bank'
 import DocEditBloodBank from './views/doctors/Edit_blood_bank'
 import DocEditBloodGroup from './views/doctors/Edit_Blood_Group'
 import UserFile from './views/doctors/Create_File'
-import Home from "./views/Home";
+import Home from "./views/home/Home";
 import File from "./views/doctors/File";
 import Profile from "./views/Profile";
 import Posts from "./views/Posts";

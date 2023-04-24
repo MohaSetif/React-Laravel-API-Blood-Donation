@@ -31,7 +31,8 @@ class User extends Authenticatable
         'blood_type',
         'email',
         'password',
-        'status'
+        'status',
+        'image'
     ];
 
     /**
