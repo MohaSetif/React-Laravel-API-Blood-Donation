@@ -15,15 +15,15 @@ const StateContext = createContext({
 });
 export const ContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
-  const [userToken, _setUserToken] = useState(localStorage.getItem('TOKEN') || '');
+  const [userToken, _setUserToken] = useState(sessionStorage.getItem('TOKEN') || '');
   const [surveys, setSurveys] = useState([]);
   const [toast, setToast] = useState({message: '', show: false})
 
   const setUserToken = (token) => {
     if (token) {
-      localStorage.setItem('TOKEN', token)
+      sessionStorage.setItem('TOKEN', token)
     } else {
-      localStorage.removeItem('TOKEN')
+      sessionStorage.removeItem('TOKEN')
     }
     _setUserToken(token);
   }

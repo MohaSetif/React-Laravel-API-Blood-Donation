@@ -1,4 +1,4 @@
-import styles from "../../views/home/Home.module.css";
+import styles from "./Home.module.css";
 import { motion as m } from "framer-motion";
 import { Link as ScrollLink, animateScroll } from "react-scroll";
 import { Link as RouteLink, useSearchParams } from "react-router-dom";
