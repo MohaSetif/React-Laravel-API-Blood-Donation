@@ -134,7 +134,7 @@ export default function Home() {
             ) : (
               <div>
               <button className="border border-gray-400 px-4 py-2">
-                <RouteLink to={'/signup'}>Sign up</RouteLink>
+                <RouteLink to={'/signup'}>Sign up now!</RouteLink>
               </button>
             </div>
             )}
