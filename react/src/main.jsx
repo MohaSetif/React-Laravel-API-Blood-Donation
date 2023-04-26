@@ -10,7 +10,12 @@ if (window.location.pathname === "/") {
 }
 
 // Import index2.css for /admin and /doctor pages
-if (window.location.pathname.startsWith("/admin") || window.location.pathname.startsWith("/doctor")) {
+if (window.location.pathname.startsWith("/admin") || 
+window.location.pathname.startsWith("/doctor") || 
+window.location.pathname.startsWith("/donate") || 
+window.location.pathname.startsWith("/profile") || 
+window.location.pathname.startsWith("/signup") || 
+window.location.pathname.startsWith("/login")) {
   import("./index.css");
 }
 
