@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -30,7 +31,14 @@ class AuthController extends Controller
             $user->hospital = $request->input('hospital');
             $user->email = $request->input('email');
             $user->password = bcrypt($request->input('password'));
-    
+
+
+            $image = $request->file('image');
+            $photoname = date('YmdHis').'.'.$image->extension();
+            $filePath = public_path('/uploads/images/');
+            $image->move($filePath, $photoname);
+            $user->image = $photoname;
+
             $user->save();
             $token = $user->createToken('main')->plainTextToken;
 
