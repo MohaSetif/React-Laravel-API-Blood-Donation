@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import http from "../../axios";
 import moment from "moment";
+import { useStateContext } from "../../contexts/ContextProvider";
 
 export default function Edit(props) {
   const [inputs, setInputs] = useState({});
   const { id } = useParams();
+  const { currentUser, setCurrentUser} = useStateContext();
 
   useEffect(() => {
     fetchUser();
@@ -23,6 +25,13 @@ export default function Edit(props) {
       });
     });
   };
+
+  useEffect(() => {
+    http.get('/me')
+      .then(({ data }) => {
+        setCurrentUser(data)
+      })
+  }, [])
 
   const handleSeen = () => {
     submitStatus("seen");
@@ -83,8 +92,8 @@ export default function Edit(props) {
                   {inputs.id}
                 </th>
                 <td className="px-3 py-4">{inputs.notification_text}</td>
-                <td className="px-3 py-4">{inputs.hospital}</td>
                 <td className="px-3 py-4">{inputs.current_hospital}</td>
+                <td className="px-3 py-4">{inputs.hospital}</td>
                 <td className="px-3 py-4">{inputs.mark_as_read}</td>
                 <td className="px-3 py-4">
                   {moment(inputs.updated_at).format("MMMM Do YYYY, HH:mm:ss")}

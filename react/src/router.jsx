@@ -2,8 +2,8 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import DefaultLayout from "./components/DefaultLayout";
 import GuestLayout from "./components/GuestLayout";
 import Dashboard from "./views/Dashboard";
-import Login from "./views/Login";
-import Signup from "./views/Signup";
+import Login from "./views/auth/login/login";
+import Signup from "./views/auth/signup/sign";
 import SurveyPublicView from "./views/SurveyPublicView";
 import Surveys from "./views/Surveys";
 import SurveyView from "./views/SurveyView";
@@ -24,7 +24,7 @@ import DocEditBloodGroup from './views/doctors/Edit_Blood_Group'
 import UserFile from './views/doctors/Create_File'
 import Home from "./views/home/Home";
 import File from "./views/doctors/File";
-import Profile from "./views/Profile";
+import Profile from "./views/home/profile/Profile";
 import Posts from "./views/Posts";
 import Notifications from "./views/admin/Notifications";
 import Notification from "./views/admin/Notification";
@@ -35,6 +35,9 @@ import AddPatients from "./views/doctors/Add_Patient";
 import Patients from "./views/doctors/Patients";
 import PatientEdit from "./views/doctors/EditPatients";
 import PatientView from "./views/doctors/PatientsView";
+import NotFound from "./NotFound";
+import MyAppointments from "./views/MyAppointments";
+import ShowUserFile from "./views/doctors/UserFile";
 
 const router = createBrowserRouter([
   {
@@ -116,8 +119,8 @@ const router = createBrowserRouter([
     element: <Posts/>
   },
   {
-    path: "/donate",
-    element: <Donate/>
+    path: "/my_appointments",
+    element: <MyAppointments/>
   },
   {
     path: "/",
@@ -198,11 +201,19 @@ const router = createBrowserRouter([
         element: <PatientView />,
       },
       {
+        path: "/doctor/user_file/:id",
+        element: <ShowUserFile />,
+      },
+      {
         path: "/doctor/patients/edit/:id",
         element: <PatientEdit />,
       },
     ],
   },
+  {
+    path: "/*",
+    element: <NotFound />
+  }
 ]);
 
 export default router;

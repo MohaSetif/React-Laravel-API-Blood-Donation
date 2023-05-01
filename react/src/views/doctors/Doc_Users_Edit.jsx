@@ -15,6 +15,7 @@ export default function Doc_Users_Edit(props) {
     const fetchUser= () =>{
         http.get('/doc_users/'+id+'/edit').then((res)=>{
             setInputs({
+                user_id:res.data.user_id,
                 name:res.data.name,
                 surname:res.data.surname,
                 birth_date:res.data.birth_date,
@@ -27,8 +28,6 @@ export default function Doc_Users_Edit(props) {
             });
         });
     }
-
-    console.log(inputs)
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -45,10 +44,10 @@ export default function Doc_Users_Edit(props) {
     return (
         <div>
 
-            <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded m-5">
+            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded m-5">
   <Link to='/doctor'>Back</Link>
 </button>
-            <h1 class="px-6 py-4 text-center text-2xl"><b>Edit User's Details: { inputs.name } { inputs.surname }</b></h1>
+            <h1 className="px-6 py-4 text-center text-2xl"><b>Edit User's Details: { inputs.name } { inputs.surname }</b></h1>
             <div className="row">
                 <div className="col-sm-6">
                     <div className="card p-4">

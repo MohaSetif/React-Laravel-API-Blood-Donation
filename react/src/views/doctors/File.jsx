@@ -1,6 +1,7 @@
 import { useState,useEffect } from "react";
 import http from '../../axios'
 import PageComponent from "../../components/PageComponent";
+import { Link } from "react-router-dom";
 
 export default function Users() {
     const [usersFiles, setUsersFiles] = useState([]);
@@ -56,7 +57,12 @@ export default function Users() {
                                 <div className="px-4 pb-4">
                                     <button type="button" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                                         onClick={()=>{deleteUser(user.id)}}
-                                        >Delete file</button>
+                                        >Delete file</button>&nbsp;
+                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                            <Link to={{ pathname: "/doctor/user_file/" + user.id }}>
+                                            View
+                                            </Link>
+                                </button>
                                 </div>
                             </div>
                         </div>

@@ -30,7 +30,7 @@ export default function View(props) {
     return (
 <>
 <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded m-5">
-  <Link to='/users'>Back</Link>
+  <Link to='/admin/users'>Back</Link>
 </button>
 <div className="flex flex-col">
 <h1 className="px-6 py-4 text-center text-2xl"><b>User's Details: { inputs.name } { inputs.surname }</b></h1>

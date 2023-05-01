@@ -6,12 +6,32 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignupRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
+     /**
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh() {
+        return $this->createNewToken(Auth::refresh());
+    }
+    /**
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function userProfile() {
+        return response()->json(auth()->user());
+    }
+
+
     public function signup(SignupRequest $request)
     {
         $data = $request->validated();
@@ -35,12 +55,12 @@ class AuthController extends Controller
 
             $image = $request->file('image');
             $photoname = date('YmdHis').'.'.$image->extension();
-            $filePath = public_path('/uploads/images/');
+            $filePath = public_path('/uploads');
             $image->move($filePath, $photoname);
             $user->image = $photoname;
 
             $user->save();
-            $token = $user->createToken('main')->plainTextToken;
+            $token = JWTAuth::fromUser($user);
 
             return response()->json([
                 'message' => 'User created successfully',
@@ -54,6 +74,12 @@ class AuthController extends Controller
         {
             $user = User::whereId($request->input('id'))->first();
 
+            $image = $request->file('image');
+            $photoname = date('YmdHis').'.'.$image->extension();
+            $filePath = public_path('/uploads');
+            $image->move($filePath, $photoname);
+            $user->image = $photoname;
+
             $user->update([
                 'name'=>$request->name,
                 'surname'=>$request->surname,
@@ -64,9 +90,12 @@ class AuthController extends Controller
                 'hospital'=>$request->hospital,
                 'email'=>$request->email,
                 'password'=>$request->password,
+                'image'=>$user->image
             ]);
+
+            
     
-            $token = $user->createToken('main')->plainTextToken;
+            $token = JWTAuth::fromUser($user);
     
             return response([
                 'user' => $user,
@@ -93,29 +122,25 @@ class AuthController extends Controller
         }
     
         Auth::login($user, $remember);
-    
-        $token = $user->createToken('main')->plainTextToken;
-    
-        return response([
-            'user' => $user,
-            'token' => $token
+        $jwt_token = JWTAuth::fromUser($user);
+
+        return response()->json([
+            'token' => $jwt_token,
+            'token_type' => 'bearer',
+            'expires_in' => Auth::factory()->getTTL() * 60,
+            'user' => $user
         ]);
     }
+
 
     public function logout(Request $request)
     {
-        /** @var User $user */
-        $user = Auth::user();
-        // Revoke the token that was used to authenticate the current request...
-        $user->currentAccessToken()->delete();
-
-        return response([
-            'success' => true
-        ]);
+        auth()->logout();
+        return response()->json(['message' => 'User successfully signed out']);
     }
 
-    public function me(Request $request)
+    public function me()
     {
-        return $request->user();
+        return response()->json(auth()->user());
     }
 }

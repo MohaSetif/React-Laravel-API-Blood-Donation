@@ -7,6 +7,7 @@ use App\Http\Resources\SurveyResource;
 use App\Models\Survey;
 use App\Http\Requests\StoreSurveyRequest;
 use App\Http\Requests\UpdateSurveyRequest;
+use App\Models\Appointments;
 use App\Models\SurveyQuestion;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -173,7 +174,7 @@ class SurveyController extends Controller
         $currentDate = new \DateTime();
         $expireDate = new \DateTime($survey->expire_date);
         if ($currentDate > $expireDate) {
-            return response("", 404);
+            Appointments::whereId($survey->id)->first()->delete();
         }
 
         return new SurveyResource($survey);

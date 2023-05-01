@@ -58,11 +58,17 @@ export default function Create() {
         </select>
       </div>
     </div>
-    <div className="w-full md:w-2/3 px-3">
+    <div className="w-full md:w-1/3 px-3">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
         Birthdate
       </label>
       <input value={inputs.birth_date || ''} onChange={handleChange} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="date" name="birth_date"/>
+    </div>
+    <div className="w-full md:w-1/3 px-3">
+      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
+        Blood Type
+      </label>
+      <input value={inputs.blood_type || ''} onChange={handleChange} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" name="blood_type"/>
     </div>
   </div>
 

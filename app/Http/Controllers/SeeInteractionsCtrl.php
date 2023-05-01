@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Interaction;
-use App\Models\UserFile;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SeeInteractionsCtrl extends Controller

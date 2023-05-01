@@ -7,10 +7,31 @@ import PageComponent from "../../components/PageComponent";
 export default function Users() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(()=>{
         fetchAllUsers();
     },[]);
+
+    useEffect(() => {
+        const results = users.filter(user =>
+            user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.surname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.blood_type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.usertype.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.id.toString().includes(searchTerm) || // convert id to a string
+            user.birth_date.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.adr.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+          
+        setFilteredUsers(results);
+    }, [searchTerm, users]);
+
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+    }
 
     const fetchAllUsers = () => {
         setLoading(true);
@@ -25,6 +46,19 @@ export default function Users() {
         <PageComponent
       title="Users"
     />  
+     <div className="flex justify-center mb-2">
+  <div className="relative text-gray-600">
+    <input
+      type="search"
+      className="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none"
+      placeholder="Search users by their data"
+      value={searchTerm}
+      onChange={handleSearch}
+    />
+    <button type="submit" className="absolute right-0 top-0 mt-3 mr-4">
+    </button>
+  </div>
+</div>
     {loading && <div className="text-center text-lg">Loading...</div>}
       {!loading && (
 <div class="relative overflow-x-auto">
@@ -46,7 +80,7 @@ export default function Users() {
             </tr>
         </thead>
         <tbody>
-            {users.map((user,index)=>(
+            {filteredUsers.map((user,index)=>(
                         <tr key={user.id} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{user.id}</th>
                             <td class="px-3 py-4">{user.name}</td>

@@ -1,4 +1,4 @@
-import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import { ArrowDownLeftIcon, ArrowLeftCircleIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import axiosClient from "../axios";
 import TButton from "../components/core/TButton";
@@ -8,6 +8,7 @@ import PostsItemList from "../components/PostsItemList";
 import { useStateContext } from "../contexts/ContextProvider";
 import router from "../router";
 import Navbar from "./Navbar";
+import '../index3.css'
 
 export default function Posts() {
   const { showToast } = useStateContext();
@@ -35,9 +36,14 @@ export default function Posts() {
 
   return (
     <>
-    <Navbar/>
     <PageComponent
-      title="Posts"
+      title="Be Cool. Give Blood"
+      buttons={
+        <TButton color="red" to="/">
+        <ArrowLeftCircleIcon className="h-6 w-6 mr-2"/>
+        Go Back Home
+      </TButton>
+      }
     >
       {loading && <div className="text-center text-lg">Loading...</div>}
       {!loading && (

@@ -1,6 +1,7 @@
 import { useState,useEffect } from "react";
 import http from '../../axios'
 import { Link, Route, Routes } from "react-router-dom";
+// import '../../index2.css'
 import PageComponent from "../../components/PageComponent";
 export default function Doc_Dashboard() {
     const [users, setUsers] = useState([]);

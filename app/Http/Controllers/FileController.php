@@ -46,7 +46,7 @@ class FileController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(UserFile::whereId($id)->first());
     }
 
     /**
@@ -57,7 +57,7 @@ class FileController extends Controller
      */
     public function edit($id)
     {
-        //
+        return response()->json(UserFile::whereId($id)->first());
     }
 
     /**

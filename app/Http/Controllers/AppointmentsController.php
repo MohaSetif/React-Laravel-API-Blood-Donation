@@ -88,6 +88,8 @@ class AppointmentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Appointments::whereId($id)->first()->delete();
+
+        return response()->json('success');
     }
 }

@@ -5,6 +5,7 @@ import axiosClient from "../axios.js";
 import TButton from "../components/core/TButton.jsx";
 import { EyeIcon, PencilIcon } from "@heroicons/react/24/outline";
 import moment from 'moment';
+import '../index.css'
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(true);
@@ -99,7 +100,7 @@ export default function Dashboard() {
                 </div> */}
                 <br />
                 <div className="flex justify-between">
-                  <TButton to={`/surveys/${data.latestSurvey.id}`} link>
+                  <TButton to={`/admin/surveys/${data.latestSurvey.id}`} link>
                     <PencilIcon className="w-5 h-5 mr-2" />
                     Edit Survey
                   </TButton>
@@ -125,9 +126,9 @@ export default function Dashboard() {
                       <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                           <tr>
                               <th scope="col" className="px-4 py-3">ID</th>
-                              <th scope="col" className="px-4 py-3">Donor's id</th>
-                              <th scope="col" className="px-4 py-3">Receiver's name</th>
-                              <th scope="col" className="px-4 py-3">Doctor's id</th>
+                              <th scope="col" className="px-4 py-3">Donor's ID</th>
+                              <th scope="col" className="px-4 py-3">Receiver's ID</th>
+                              <th scope="col" className="px-4 py-3">Doctor's ID</th>
                               <th scope="col" className="px-4 py-3">Transfusion type</th>
                               <th scope="col" className="px-4 py-3">Transfusion status</th>
                               <th scope="col" className="px-4 py-3">Transfusion date</th>
@@ -138,7 +139,7 @@ export default function Dashboard() {
                                       <tr key={interaction.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                           <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{interaction.id}</th>
                                           <td className="px-3 py-4">{interaction.donor_id}</td>
-                                          <td className="px-3 py-4">{interaction.receiver_name}</td>
+                                          <td className="px-3 py-4">{interaction.receiver_id}</td>
                                           <td className="px-3 py-4">{interaction.doctor_id}</td>
                                           <td className="px-3 py-4">{interaction.transfusion_type}</td>
                                           <td className="px-3 py-4">{interaction.transfusion_status}</td>

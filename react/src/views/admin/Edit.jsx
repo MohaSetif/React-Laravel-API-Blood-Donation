@@ -21,12 +21,11 @@ export default function Edit(props) {
                 adr:res.data.adr,
                 tel:res.data.tel,
                 usertype:res.data.usertype,
+                blood_type:res.data.blood_type,
                 email:res.data.email,
             });
         });
     }
-
-    console.log(inputs)
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -34,18 +33,12 @@ export default function Edit(props) {
         setInputs(values => ({...values,[name]:value}))
     }
 
-    const submitForm = () =>{
-        http.put('/users/'+id, { ...inputs, usertype: usertype }).then((res)=>{
-            navigate('/users');
-        })
-    }
-
     const handleAccept = () => {
         submitStatus("donor");
       };
       
       const handleReject = () => {
-        submitStatus("regular_user");
+        submitStatus("blocked");
       };
 
       const submitStatus = (usertype) => {
@@ -54,13 +47,19 @@ export default function Edit(props) {
         })
       }
 
+      const submitForm = () =>{
+        http.put('/users/'+id, { ...inputs}).then((res)=>{
+            navigate('/admin/users');
+        })
+    }
+
     return (
         <div>
 
-            <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded m-5">
-  <Link to='/users'>Back</Link>
+            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded m-5">
+  <Link to='/admin/users'>Back</Link>
 </button>
-            <h1 class="px-6 py-4 text-center text-2xl"><b>Edit User's Details: { inputs.name } { inputs.surname }</b></h1>
+            <h1 className="px-6 py-4 text-center text-2xl"><b>Edit User's Details: { inputs.name } { inputs.surname }</b></h1>
             <div className="row">
                 <div className="col-sm-6">
                     <div className="card p-4">
@@ -91,6 +90,13 @@ export default function Edit(props) {
 <label>Phone Number</label>
                         <input type="text" name="tel" className="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                             value={inputs.tel || ''}
+                            onChange={handleChange}
+                        />
+
+
+<label>Blood Type</label>
+                        <input type="text" name="blood_type" className="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                            value={inputs.blood_type || ''}
                             onChange={handleChange}
                         />
 

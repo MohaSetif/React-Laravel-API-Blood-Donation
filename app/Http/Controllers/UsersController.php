@@ -37,6 +37,7 @@ class UsersController extends Controller
         $user->usertype = $request->input('usertype');
         $user->adr = $request->input('adr');
         $user->tel = $request->input('tel');
+        $user->blood_type = $request->input('blood_type');
         $user->hospital = Auth::user()->hospital;
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
@@ -79,7 +80,7 @@ class UsersController extends Controller
             'birth_date'=>$request->birth_date,
             'adr'=>$request->adr,
             'usertype'=>$request->usertype,
-            'blood_type'=>$request->usertype,
+            'blood_type'=>$request->blood_type,
             'email'=>$request->email,
             'status'=>$request->status,
         ]);

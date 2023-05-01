@@ -14,10 +14,13 @@ class NotificationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $user = auth()->user();
-        return response()->json(Notification::where('hospital', $user->hospital)->get());
-    }
+{
+    $user = auth()->user();
+    return response()->json(Notification::where('hospital', $user->hospital)
+        ->orWhere('current_hospital', $user->hospital)
+        ->get());
+}
+
 
     /**
      * Store a newly created resource in storage.

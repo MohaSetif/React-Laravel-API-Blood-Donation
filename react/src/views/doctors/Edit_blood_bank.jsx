@@ -20,10 +20,7 @@ export default function Edit_Blood_Bank(props) {
             });
         });
     }
-
-    console.log(inputs)
-
-
+    
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;

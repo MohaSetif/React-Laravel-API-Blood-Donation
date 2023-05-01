@@ -92,10 +92,6 @@ export default function SurveyView() {
       title={!id ? "Create new post" : "Update post"}
       buttons={
         <div className="flex gap-2">
-          <TButton color="green" href={`/survey/public/${survey.slug}`}>
-            <LinkIcon className="h-4 w-4 mr-2" />
-            Public Link
-          </TButton>
           <TButton color="red">
             <TrashIcon className="h-4 w-4 mr-2" />
             <Link to="/admin/surveys">Delete</Link>
@@ -209,34 +205,6 @@ export default function SurveyView() {
                 />
               </div>
               {/*Expire Date*/}
-
-               {/*Active*/}
-               <div className="flex items-start">
-                <div className="flex h-5 items-center">
-                  <input
-                    id="status"
-                    name="status"
-                    type="checkbox"
-                    checked={survey.status}
-                    onChange={(ev) =>
-                      setSurvey({ ...survey, status: ev.target.checked })
-                    }
-                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                  />
-                </div>
-                <div className="ml-3 text-sm">
-                  <label
-                    htmlFor="comments"
-                    className="font-medium text-gray-700"
-                  >
-                    Active
-                  </label>
-                  <p className="text-gray-500">
-                    Whether to make survey publicly available
-                  </p>
-                </div>
-              </div>
-              {/*Active*/}
 
             </div>
             <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">

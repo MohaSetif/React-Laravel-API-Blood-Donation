@@ -13,6 +13,7 @@ use App\Http\Controllers\InteractionController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\NotifyStatusCtrl;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\SeeAppointmentsCtrl;
 use App\Http\Controllers\SeeInteractionsCtrl;
 use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
@@ -29,10 +30,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
-    Route::get('/myImage', [AuthController::class, 'getUserImage']);
     Route::apiResource('survey', SurveyController::class);
     Route::resource('/blood_bank', BloodBankCtrl::class);
     Route::resource('/blood_groups', BloodCtrl::class);
@@ -40,13 +40,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('/users',UsersController::class);
     Route::put('/users/{id}/status', [AdminController::class, 'updateStatus'])->name('users.updateStatus');
     Route::get('/profile', [SeeInteractionsCtrl::class, 'getInteractions']);
+    Route::get('/my_appointments', [SeeAppointmentsCtrl::class, 'getAppointments']);
     Route::resource('/notifications', NotificationController::class);
     Route::put('/notifications/{id}/status', [NotifyStatusCtrl::class, 'markAsRead']);
     Route::get('/notifications/count', [NotifyStatusCtrl::class, 'countNotification']);
     Route::resource('/appointments', AppointmentsController::class);
-});
 
-Route::middleware('auth:sanctum')->group(function () {
+    
+
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
     Route::get('/myImage', [AuthController::class, 'getUserImage']);
@@ -59,6 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('/patients',PatientController::class);
     Route::put('/doc_users/{id}/status', [AdminController::class, 'updateStatus'])->name('doc_users.updateStatus');
 });
+
 
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Bloodbank;
 use App\Models\Total_blood;
+use Faker\Core\Blood;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BloodBankCtrl extends Controller
 {
@@ -53,14 +55,23 @@ class BloodBankCtrl extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $blood = Bloodbank::whereId($id)->first();
+{
+    $blood = Bloodbank::whereId($id)->first();
 
-        $blood->update([
-            'quantity'=>$request->quantity,
-        ]);
-        return response()->json('success');
-    }
+    $blood->update([
+        'quantity' => $request->quantity,
+    ]);
+
+    Log::info('Blood quantity updated: ' . $blood->quantity);
+
+    $totalQuantity = Bloodbank::query()->sum('quantity');
+    Total_blood::query()->update(['quantity' => $totalQuantity]);
+
+    Log::info('Total blood quantity updated: ' . $totalQuantity);
+
+    return response()->json('success');
+}
+
 
     /**
      * Remove the specified resource from storage.

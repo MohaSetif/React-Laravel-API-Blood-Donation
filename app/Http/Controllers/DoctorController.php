@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointments;
 use App\Models\User;
 use App\Models\UserFile;
 use Illuminate\Http\Request;
@@ -64,7 +65,10 @@ class DoctorController extends Controller
      */
     public function show($id)
     {
-        //
+        $file = UserFile::query()->findOrFail($id);
+        $userId = $file->user_id;
+        $user = User::query()->findOrFail($userId);
+        return response()->json($user);
     }
 
     /**
@@ -75,7 +79,10 @@ class DoctorController extends Controller
      */
     public function edit($id)
     {
-        return response()->json(User::whereId($id)->first());
+        $appointment = Appointments::query()->findOrFail($id);
+        $userId = $appointment->user_id;
+        $user = User::query()->findOrFail($userId);
+        return response()->json($user);
     }
 
     /**
@@ -87,7 +94,9 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::whereId($id)->first();
+        $appointment = Appointments::query()->findOrFail($id);
+        $userId = $appointment->user_id;
+        $user = User::query()->findOrFail($userId)->first();
 
         $user->update([
             'name'=>$request->name,

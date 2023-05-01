@@ -2,7 +2,7 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background-color: var(--primary-white);
+  background-color: var(--primary-color-100);
   position: relative;
 }
 
@@ -32,7 +32,7 @@
         display: inline;
         position: relative;
         background-color: transparent;
-        border: 1.7px solid var(--primary-color-600);
+        border: 1.7px solid var(--secondary-color);
         font-size: var(--font-size-md);
         height: fit-content;
         width: fit-content;
@@ -41,6 +41,7 @@
         align-items: center;
         border-radius: 5rem;
         font-weight: bold;
+        overflow: hidden;
         color: var(--primary-black);
         cursor: pointer;
         z-index: 2;
@@ -60,7 +61,7 @@
           left: 0;
           top: 0;
           transition: all 300ms 0s ease;
-          background-color: var(--primary-color-600);
+          background-color: var(--secondary-color);
           border-radius: 0.5px;
           z-index: -1;
         }
@@ -140,7 +141,7 @@
           padding-inline: 0.2rem;
           padding-block: 0.4rem;
           background-color: transparent;
-          border: 0.5px solid var(--primary-color-600);
+          border: 0.5px solid var(--secondary-color);
           font-size: var(--font-size-md);
 
           &:hover {
@@ -158,7 +159,7 @@
             left: 0;
             top: 0;
             transition: all 300ms 0s ease;
-            background-color: var(--primary-color-600);
+            background-color: var(--secondary-color);
             border-radius: 0.5px;
             z-index: -1;
           }
@@ -215,4 +216,43 @@
     object-fit: cover;
     object-position: center;
   }
+}
+
+
+.dropdown__toggle {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.dropdown__menu {
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  z-index: 1;
+}
+
+.dropdown__menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown__menu li {
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.dropdown__menu li:hover {
+  background-color: #f2f2f2;
 }
