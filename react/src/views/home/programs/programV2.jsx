@@ -4,7 +4,7 @@ import img2 from "../../../assets/images/doctorImg.jpg";
 import img3 from "../../../assets/images/donorImg.jpg";
 import { motion as m } from "framer-motion";
 import { appear, textUp } from "../../../functions/variants";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 
 const programs = [
