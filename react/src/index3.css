@@ -1,0 +1,12 @@
+@font-face {
+    font-family: metafiz-bold;
+    src: url("./src/assets/fonts/Metafiz-Bold.ttf");
+  }
+  @font-face {
+    font-family: metafiz-regular;
+    src: url("./src/assets/fonts/Metafiz-Regular.ttf");
+  }
+
+  .Doctor, .Admin{
+    font-family: metafiz-regular;
+  }
